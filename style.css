@@ -221,7 +221,7 @@ main {
 }
 
 
-/* Footer Styles (NEW) */
+/* Footer Styles */
 footer {
     width: 100%;
     padding: 30px 20px; /* Padding above and below the text */
@@ -230,8 +230,10 @@ footer {
     font-size: 0.8em; /* Smaller font size for disclaimer */
     letter-spacing: 0.05em;
     margin-top: 50px; /* Add some space above the footer */
-    /* If body is flex column, margin-top: auto; would push it to the very bottom,
-       but fixed margin-top gives consistent spacing from last album. */
+}
+
+footer p { /* NEW: Target the paragraph inside the footer */
+    font-weight: bold; /* Make the disclaimer text bold */
 }
 
 
