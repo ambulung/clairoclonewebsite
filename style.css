@@ -1,0 +1,265 @@
+/* Define CSS Variables for easy theme changes */
+:root {
+    --background-color: #888740; /* The olive/khaki green from the image */
+    --text-color: #333; /* Dark grey/black for text (also the black button color) */
+    --font-mono: 'IBM Plex Mono', monospace; /* Google Fonts for the monospace style */
+}
+
+/* Global Box Sizing for easier layout calculations (RECOMMENDED) */
+html {
+    box-sizing: border-box;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+
+/* Base Styles */
+body {
+    margin: 0;
+    font-family: var(--font-mono);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    min-height: 100vh; /* Full viewport height */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    line-height: 1.6;
+}
+
+/* Header & Navigation */
+header {
+    width: 100%;
+    padding: 20px 0;
+    position: sticky; /* Make header sticky */
+    top: 0;
+    background-color: var(--background-color); /* Ensure background is solid when sticky */
+    z-index: 100; /* Ensure it stays on top */
+}
+
+nav {
+    display: flex;
+    justify-content: space-between; /* Pushes CLAIRO to left, MUSIC to right */
+    align-items: center;
+    max-width: 1000px; /* Max width for nav to align with main content visually */
+    margin: 0 auto;
+    padding: 0 20px; /* Padding on sides for smaller screens */
+}
+
+.logo {
+    font-weight: 700; /* Bold */
+    font-size: 1.5em; /* Made CLAIRO text bigger */
+    letter-spacing: 0.05em; /* Reduced spacing slightly as text is now one word */
+    text-transform: uppercase;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 40px; /* Space out nav items */
+}
+
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none; /* Removed default underline */
+    font-weight: 700; /* Made MUSIC text bold */
+    border-bottom: 2px solid var(--text-color); /* Added custom thicker underline */
+    padding-bottom: 2px; /* Added small gap between text and underline */
+    letter-spacing: 0.1em; /* Increased letter spacing for bold text */
+    font-size: 0.9em;
+    transition: opacity 0.3s ease; /* Smooth hover effect */
+    text-transform: uppercase;
+}
+
+nav ul li a:hover {
+    opacity: 0.7;
+}
+
+/* Main Content Area */
+main {
+    width: 100%;
+    max-width: 600px; /* Optimal width for the overall column */
+    margin: 0 auto; /* Centers the main content column */
+    padding: 20px 20px; /* Reduced top padding from 40px to 20px */
+    box-sizing: border-box; /* Include padding in width calculations */
+    display: flex; /* Use flexbox to stack album sections vertically */
+    flex-direction: column;
+    align-items: center; /* Centers the album sections horizontally within 'main' */
+}
+
+/* Album Sections - Vertical stacking */
+.album-section {
+    display: flex; /* Make it a flex container */
+    flex-direction: column; /* Stack children (h2, img, a) vertically */
+    align-items: center; /* Center them horizontally */
+    text-align: center; /* Ensures h2 and any other text is centered */
+    width: 100%; /* Take full width of its parent */
+    margin-bottom: 40px; /* Reduced vertical spacing between albums from 80px to 40px */
+}
+
+.album-section h2 {
+    font-size: 2.5em; /* Large font size for album titles */
+    margin-bottom: 30px; /* Space below title */
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* New wrapper for image and overlay */
+.album-cover-wrapper {
+    position: relative; /* Crucial for positioning the overlay */
+    width: 100%; /* Match image width */
+    max-width: 300px; /* Match image max-width */
+    margin-bottom: 20px; /* Space between wrapper (image area) and the button below */
+    overflow: hidden; /* Ensures overlay doesn't spill out if content is too large */
+}
+
+/* Image within album section */
+.album-cover-wrapper img {
+    display: block; /* Removes extra space below image */
+    width: 100%; /* Make images responsive within their container */
+    height: auto; /* Maintain aspect ratio */
+    border: 1px solid var(--text-color); /* Thin border as seen in the original */
+    transition: filter 0.3s ease; /* Smooth transition for darkening effect */
+    box-sizing: border-box; /* Include border within the element's width */
+}
+
+/* Song list overlay */
+.song-list-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--text-color); /* Black background (same as text-color) */
+    color: var(--background-color); /* Text color same as hovered button text */
+    display: flex; /* Enable flexbox for vertical centering */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center; /* Vertically center content */
+    align-items: center; /* Horizontally center content */
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease; /* Smooth fade-in */
+    padding: 20px 15px; /* Adjusted padding for better spacing */
+    box-sizing: border-box; /* Include padding in width/height */
+    pointer-events: none; /* Allows clicks to pass through if not hovered, preventing blocking the image */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    -webkit-overflow-scrolling: touch; /* Improves scrolling performance on iOS */
+}
+
+/* Scrollbar styling for Webkit browsers (Chrome, Safari) */
+.song-list-overlay::-webkit-scrollbar {
+    width: 6px; /* Width of the scrollbar */
+}
+
+.song-list-overlay::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1); /* Light transparent track */
+    border-radius: 10px;
+}
+
+.song-list-overlay::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4); /* Slightly darker transparent thumb */
+    border-radius: 10px;
+}
+
+
+.album-cover-wrapper:hover .song-list-overlay {
+    opacity: 1; /* Show on hover */
+    pointer-events: auto; /* Re-enable pointer events on hover for content within overlay */
+}
+
+.album-cover-wrapper:hover img {
+    filter: brightness(0.5); /* Darken the image slightly on hover */
+}
+
+.song-list-overlay ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0; /* Ensure no default margin pushing content */
+    text-align: center;
+    width: 100%; /* Ensure UL takes full width for centering LIs */
+}
+
+.song-list-overlay ul li {
+    font-size: 0.75em; /* Made font size smaller for long lists */
+    margin-bottom: 4px; /* Reduced space between song titles */
+    letter-spacing: 0.05em;
+    line-height: 1.2; /* Tighter line height for more songs to fit */
+    word-wrap: break-word; /* Ensures long titles wrap */
+    font-weight: bold; /* CHANGED: Make song list text bold */
+}
+.song-list-overlay ul li:last-child {
+    margin-bottom: 0; /* No margin after the last song */
+}
+
+
+/* Listen Button */
+.listen-button {
+    display: flex; /* Make button a flex container to align icon and text */
+    align-items: center; /* Vertically center icon and text */
+    justify-content: center; /* Horizontally center content inside button */
+    padding: 10px 25px;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.85em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.listen-button i { /* Style for the Spotify icon */
+    margin-right: 8px; /* Space between icon and text */
+    font-size: 1.2em; /* Slightly larger icon */
+}
+
+.listen-button:hover {
+    background-color: var(--text-color); /* Invert colors on hover */
+    color: var(--background-color); /* Button text becomes olive/khaki */
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column; /* Stack logo and nav links vertically */
+        gap: 20px;
+    }
+
+    nav ul {
+        gap: 20px; /* Reduce gap for smaller screens */
+    }
+
+    /* Adjust logo size for smaller screens */
+    .logo {
+        font-size: 1.2em;
+    }
+
+    .album-section h2 {
+        font-size: 2em; /* Smaller titles on medium screens */
+    }
+    .song-list-overlay ul li {
+        font-size: 0.7em; /* Even smaller song titles on medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    nav ul li {
+        width: 100%; /* Make list items take full width to center text */
+    }
+    .album-section h2 {
+        font-size: 1.8em; /* Even smaller titles on small screens */
+    }
+    .album-cover-wrapper {
+        max-width: 250px; /* Slightly smaller images on very small screens */
+    }
+    .song-list-overlay ul li {
+        font-size: 0.65em; /* Even smaller song titles on very small screens */
+    }
+}
