@@ -88,6 +88,7 @@ main {
     display: flex; /* Use flexbox to stack album sections vertically */
     flex-direction: column;
     align-items: center; /* Centers the album sections horizontally within 'main' */
+    flex-grow: 1; /* Allows main content to grow and push footer down */
 }
 
 /* Album Sections - Vertical stacking */
@@ -187,7 +188,7 @@ main {
     letter-spacing: 0.05em;
     line-height: 1.2; /* Tighter line height for more songs to fit */
     word-wrap: break-word; /* Ensures long titles wrap */
-    font-weight: bold; /* CHANGED: Make song list text bold */
+    font-weight: bold; /* Make song list text bold */
 }
 .song-list-overlay ul li:last-child {
     margin-bottom: 0; /* No margin after the last song */
@@ -220,6 +221,20 @@ main {
 }
 
 
+/* Footer Styles (NEW) */
+footer {
+    width: 100%;
+    padding: 30px 20px; /* Padding above and below the text */
+    text-align: center;
+    color: var(--text-color); /* Use the default text color */
+    font-size: 0.8em; /* Smaller font size for disclaimer */
+    letter-spacing: 0.05em;
+    margin-top: 50px; /* Add some space above the footer */
+    /* If body is flex column, margin-top: auto; would push it to the very bottom,
+       but fixed margin-top gives consistent spacing from last album. */
+}
+
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     nav {
@@ -242,6 +257,10 @@ main {
     .song-list-overlay ul li {
         font-size: 0.7em; /* Even smaller song titles on medium screens */
     }
+    footer {
+        font-size: 0.7em; /* Smaller font for footer on smaller screens */
+        padding: 20px 15px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -261,5 +280,8 @@ main {
     }
     .song-list-overlay ul li {
         font-size: 0.65em; /* Even smaller song titles on very small screens */
+    }
+    footer {
+        font-size: 0.65em; /* Even smaller font for footer on very small screens */
     }
 }
