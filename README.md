@@ -4,5 +4,5 @@ This repository contains a recreation of the music section of Clairo's official 
 
 This is an unofficial fan project and is **not affiliated with Clairo or her management in any way.** All content (images, song titles, etc.) are used for demonstration purposes only.
 
-The original and official website, which served as inspiration, can be found here:
+The original and offial website can be found here:
 [https://clairo.com/pages/music](https://clairo.com/pages/music)
